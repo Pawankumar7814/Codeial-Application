@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+// Setting up the view engine
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
 // Use express router - By default it will fetch the index file
 app.use('/', require('./routes'));
 

@@ -7,3 +7,7 @@
 6. Partials and Layouts
 7. Static files (CSS, JS, Images and etc.)
 8. Setup the database (Mongo DB)
+
+
+# Routes
+1. 

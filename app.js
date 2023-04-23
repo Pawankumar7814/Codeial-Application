@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
-
+// Use express router - By default it will fetch the index file
+app.use('/', require('./routes'));
 
 // Starting the server
 app.listen(port, function(err) {

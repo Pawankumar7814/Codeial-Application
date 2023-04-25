@@ -5,6 +5,13 @@ const postController = require('../controllers/post_controller');
 // Route to user profile page
 router.get('/profile', userController.profile);
 
+// Route to sign up page
+router.get('/sign-up', userController.signup);
+// Route to sign in page
+router.get('/sign-in', userController.signin);
+
+// Route to create user
+router.post('/create-user', userController.createUser);
 // Route to user post page
 router.get('/post', postController.post);
 

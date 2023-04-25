@@ -9,5 +9,12 @@
 8. Setup the database (Mongo DB)
 
 
-# Routes
-1. 
+# Manual Authentication
+1.  POST (Username and Password) -> Verfiy Identity -> Store identity Token in browser(using cookies)
+    -> Server user specific data -> Delete token on sign out
+
+2. Setting up the user schema
+    1. Create User (Sign up)
+    2. Create Session (Sign in)
+    3. Show Details of Signed in User
+    4. Sign out

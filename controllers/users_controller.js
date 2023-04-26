@@ -44,3 +44,7 @@ module.exports.createUser = async function(req, res) {
         console.log(`Error while creating the user ${error}`);
     }
 }
+
+module.exports.createSession = function(req, res) {
+    // TODO later
+}

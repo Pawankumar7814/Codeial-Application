@@ -12,6 +12,7 @@ router.get('/sign-in', userController.signin);
 
 // Route to create user
 router.post('/create-user', userController.createUser);
+router.post('/create-session', userController.createSession);
 // Route to user post page
 router.get('/post', postController.post);
 

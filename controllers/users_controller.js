@@ -1,11 +1,26 @@
 const mongoose = require('../config/mongoose');
 const User = require('../models/user');
 
-module.exports.profile = function(req, res) {
+module.exports.profile = async function(req, res) {
     // return res.end('user profile page');
-    return res.status(200).render('profile', {
-        title: "Profile - Codeial"
-    })
+    // return res.status(200).render('profile', {title: "Profile - Codeial"});
+    try {
+        if (req.cookies.user_id) {
+            var user = await User.findById(req.cookies.user_id);
+            if (user) {
+                return res.render('profile', {
+                    title: "User Profile",
+                    user: user
+                });
+            } else {
+                return res.redirect('/users/sign-in');
+            }
+        } else {
+            return res.redirect('/users/sign-in');
+        }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports.signup = function(req, res) {
@@ -45,6 +60,23 @@ module.exports.createUser = async function(req, res) {
     }
 }
 
-module.exports.createSession = function(req, res) {
-    // TODO later
+module.exports.createSession = async function(req, res) {
+    // Steps to authenticate
+    // find the user
+    try {
+        var user = await User.findOne({ email: req.body.email });
+        if (user) {
+            // handle password didn't match
+            if (user.password != req.body.password) {
+                return res.redirect('back');
+            }
+            // handle session creation
+            res.cookie('user_id', user.id);
+            return res.redirect('/users/profile');
+        }
+        // handle user not found
+        return res.redirect('back');
+    } catch (err) {
+        console.log(err);
+    }
 }

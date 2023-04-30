@@ -10,5 +10,7 @@ router.get('/', homeController.home);
 
 // Route to user pages
 router.use('/users', require('./user'));
+// Route to post pages
+router.use('/posts', require('./posts'));
 
 module.exports = router;

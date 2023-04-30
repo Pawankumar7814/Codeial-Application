@@ -7,4 +7,19 @@
         <textarea name="content" id="" cols="30" rows="3" placeholder="post..."></textarea>
         <button type="submit">Post</button>
     </form>
+
+    <div id="post-list-container">
+        <ul>
+            <% for(post of posts) { %>
+                <li>
+                    <%= post.content %>
+                        <p>
+                            <small>
+                                Post by: <%= post.user.name %>
+                            </small>
+                        </p>
+                </li>
+                <% } %>
+        </ul>
+    </div>
 </section>

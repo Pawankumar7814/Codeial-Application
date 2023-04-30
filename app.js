@@ -5,6 +5,11 @@ const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
+// Used for session cookie
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
@@ -13,6 +18,30 @@ app.use(expressLayouts);
 // Extract style and scripts from sub pages into the layouts
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
+
+//  Session part - Mongostore is used to store the session cookie in the db
+app.use(session({
+    name: 'Codeial',
+    // TODO change the secret before the deployment in the production
+    secret: 'temporary',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
+    },
+    store: MongoStore.create({
+        mongoUrl: 'mongodb://127.0.0.1:27017/codeial_development',
+        // dbName: 'codeial_development', // Optional
+        autoRemove: 'disabled'
+    }, function(err) {
+        console.log(err || 'connect-mongo is setup successfully');
+    })
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 // To acess the static files
 app.use(express.static('./assets'));

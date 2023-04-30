@@ -3,19 +3,26 @@ const User = require('../models/user');
 
 module.exports.profile = function(req, res) {
     // return res.end('user profile page');
-    return res.status(200).render('profile', {
-        title: "Profile - Codeial"
-    })
+    return res.status(200).render('profile', { title: "Profile - Codeial" });
 }
 
+// Route to sign up
 module.exports.signup = function(req, res) {
+    if (req.isAuthenticated()) {
+        return res.redirect('/users/profile');
+    }
     return res.status(200).render('signup', { title: "Sign up - Codeial" });
 }
 
+// Route to sign in page
 module.exports.signin = function(req, res) {
+    if (req.isAuthenticated()) {
+        return res.redirect('/users/profile');
+    }
     return res.status(200).render('signin', { title: "Sign in - Codeial" });
 }
 
+// Route to create a new user
 module.exports.createUser = async function(req, res) {
     var userData = {
             name: req.body.name,
@@ -26,7 +33,6 @@ module.exports.createUser = async function(req, res) {
         // console.log(userData);
     try {
         var checkUser = await User.findOne({ email: userData.email });
-
         if (!checkUser) {
             if (userData.password != userData.confirm_password) {
                 return res.redirect('/users/sign-up');
@@ -45,6 +51,17 @@ module.exports.createUser = async function(req, res) {
     }
 }
 
+// Route to home page after user log in
 module.exports.createSession = function(req, res) {
-    // TODO later
+    return res.redirect('/');
+}
+
+// Route to sign out
+module.exports.destroySession = function(req, res) {
+    req.logout(function(err) {
+        if (err) {
+            console.log(err);
+        }
+    }); // Passport gives this req.
+    return res.redirect('/');
 }

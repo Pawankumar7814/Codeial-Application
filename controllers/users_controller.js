@@ -60,7 +60,7 @@ module.exports.createSession = function(req, res) {
 module.exports.destroySession = function(req, res) {
     req.logout(function(err) {
         if (err) {
-            console.log(err);
+            console.send(err); // Error showing in the terminal while sign out
         }
     }); // Passport gives this req.
     return res.redirect('/');

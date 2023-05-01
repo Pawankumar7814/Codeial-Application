@@ -12,5 +12,7 @@ router.get('/', homeController.home);
 router.use('/users', require('./user'));
 // Route to post pages
 router.use('/posts', require('./posts'));
+// Route to comment page
+router.use('/comments', require('./comments'));
 
 module.exports = router;

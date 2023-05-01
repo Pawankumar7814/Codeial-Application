@@ -1,3 +1,8 @@
+# Required Software to run this project
+1. Node js
+2. MongoDB - For the database
+3. Robo 3t or Studio 3T - At this time when I am developing this project software name is Studio 3T
+
 # Summary of Major Project
 1. Setup the Directory structure - config controllers models assets views routes
 2. Express Server 

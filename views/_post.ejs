@@ -1,0 +1,29 @@
+<li>
+    <%= post.content %>
+        <p>
+            <% if(locals.user && locals.user.id==post.user.id) { %>
+                <small><a href="/posts/destroy/<%= post.id %>">X</a></small>
+                <% } %>
+        </p>
+        <br>
+        <i>
+            <%= post.user.name %>
+        </i>
+
+        <div class="post-comments">
+            <% if(locals.user) { %>
+                <form action="/comments/new-comment" method="post">
+                    <textarea name="content" id="" cols="30" rows="1" placeholder="Comment..."></textarea>
+                    <input type="hidden" value="<%= post._id %>" name="post" id="">
+                    <button type="submit">Comment</button>
+                </form>
+                <% } %>
+        </div>
+        <div class="post-comment-list">
+            <ul id="post-comments-<%= post._id %>">
+                <% for(comments of post.comment) { %>
+                    <%- include('_comment.ejs') %>
+                        <% } %>
+            </ul>
+        </div>
+</li>

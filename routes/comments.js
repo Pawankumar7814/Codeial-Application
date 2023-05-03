@@ -6,6 +6,6 @@ const commentController = require('../controllers/comment_controller');
 
 // Route to add a new comment
 router.post('/new-comment', passport.checkAuthentication, commentController.addComment);
-
+// Route to delete an existing comment
 router.get('/destroy/:id', passport.checkAuthentication, commentController.destroy);
 module.exports = router;

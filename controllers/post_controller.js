@@ -3,6 +3,7 @@ const Post = require('../models/post');
 const mongoose = require('../config/mongoose');
 const Comment = require('../models/comment');
 
+// To add a new post
 module.exports.postCreate = async function(req, res) {
     try {
         var postData = {

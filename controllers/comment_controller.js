@@ -1,9 +1,8 @@
 // Import modules and models
 const Comment = require('../models/comment');
 const Post = require('../models/post');
-// const Post = require('../models/post');
 
-
+// Route to add a new comment
 module.exports.addComment = async function(req, res) {
     try {
         var post = await Post.findById(req.body.post);
@@ -28,6 +27,7 @@ module.exports.addComment = async function(req, res) {
     }
 }
 
+// To delete the comments from the database either from the collection of post or comments (Basically from both)
 module.exports.destroy = async function(req, res) {
     try {
         var comment = await Comment.findById(req.params.id);

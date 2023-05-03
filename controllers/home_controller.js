@@ -2,7 +2,7 @@
 // const mongoose = require('../config/mongoose');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
-
+const User = require('../models/user');
 // Route to home page and parallely we are displaying the post and user data 
 module.exports.home = async function(req, res) {
     // try {
@@ -29,10 +29,13 @@ module.exports.home = async function(req, res) {
             })
             .exec();
         // var comment = await Comment.find({}).populate('post').exec();
+
+        var user = await User.find();
         return res.status(200).render('home', {
             title: "Home - Codeial",
             posts: post,
-            comments: post
+            comments: post,
+            users: user
         });
     } catch (error) {
         console.log(error);

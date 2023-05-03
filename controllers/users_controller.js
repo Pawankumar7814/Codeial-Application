@@ -1,9 +1,29 @@
 const mongoose = require('../config/mongoose');
 const User = require('../models/user');
 
-module.exports.profile = function(req, res) {
+// To view the user profile
+module.exports.profile = async function(req, res) {
     // return res.end('user profile page');
-    return res.status(200).render('profile', { title: "Profile - Codeial" });
+    var user = await User.findById(req.params.id);
+    // console.log(user);
+    return res.status(200).render('profile', { title: "Profile - Codeial", profile_user: user });
+}
+
+// To update the user profile
+module.exports.update = async function(req, res) {
+    try {
+        if (req.user.id == req.params.id) {
+            var user = await User.findByIdAndUpdate(req.params.id, req.body);
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+            return res.redirect('back');
+        }
+        return res.redirect('back');
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send('Internal server error');
+    }
 }
 
 // Route to sign up

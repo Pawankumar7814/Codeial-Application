@@ -27,3 +27,17 @@ module.exports.addComment = async function(req, res) {
         console.log(err);
     }
 }
+
+module.exports.destroy = async function(req, res) {
+    try {
+        var comment = await Comment.findById(req.params.id);
+        if (comment.user == req.user.id) {
+            let postId = comment.post;
+            await Comment.deleteOne({ _id: req.params.id });
+            await Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+        }
+        return res.redirect('back');
+    } catch (err) {
+        console.log(err);
+    }
+}

@@ -15,10 +15,15 @@
                         <li>
                             <%= post.content %>
                                 <p>
-                                    <small>
-                                        Post by: <%= post.user.name %>
-                                    </small>
+                                    <% if(locals.user && locals.user.id==post.user.id) { %>
+                                        <small><a href="/posts/destroy/<%= post.id %>">X</a></small>
+                                        <% } %>
                                 </p>
+                                <br>
+                                <i>
+                                    <%= post.user.name %>
+                                </i>
+
                                 <div class="post-comments">
                                     <% if(locals.user) { %>
                                         <form action="/comments/new-comment" method="post">

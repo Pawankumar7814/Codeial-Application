@@ -1,3 +1,18 @@
-body {
-    background-color: lavenderblush;
+#home-container {
+    display: flex;
+    margin: 10px;
+    height: 100vh;
+}
+
+#home-container #feed-posts {
+    width: 70%;
+}
+
+#home-container #user-friends {
+    width: 30%;
+    border-left: 1px solid black;
+}
+
+#home-container #user-friends ul {
+    list-style-type: none;
 }

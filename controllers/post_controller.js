@@ -13,8 +13,10 @@ module.exports.postCreate = async function(req, res) {
             content: postData.content,
             user: req.user._id
         });
+        req.flash('success', 'New Post Added');
         return res.redirect('back');
     } catch (error) {
+        req.flash('error', error);
         console.log(error);
     }
 }
@@ -28,8 +30,10 @@ module.exports.destroy = async function(req, res) {
             await Post.deleteOne({ _id: req.params.id });
             await Comment.deleteMany({ post: req.params.id });
         }
+        req.flash('success', 'Post Deleted');
         return res.redirect('back');
     } catch (error) {
+        req.flash('success', error);
         console.log(error);
     }
 }

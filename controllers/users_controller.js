@@ -1,6 +1,7 @@
 const mongoose = require('../config/mongoose');
 const User = require('../models/user');
 
+
 // To view the user profile
 module.exports.profile = async function(req, res) {
     // return res.end('user profile page');
@@ -73,6 +74,7 @@ module.exports.createUser = async function(req, res) {
 
 // Route to home page after user log in
 module.exports.createSession = function(req, res) {
+    req.flash('success', 'Logged in successfully.');
     return res.redirect('/');
 }
 
@@ -82,6 +84,8 @@ module.exports.destroySession = function(req, res) {
         if (err) {
             console.send(err); // Error showing in the terminal while sign out
         }
-    }); // Passport gives this req.
+    });
+    // Passport gives this req.
+    req.flash('success', 'Logged out successfully.');
     return res.redirect('/');
 }

@@ -13,9 +13,13 @@
         <div class="post-comments">
             <% if(locals.user) { %>
                 <form action="/comments/new-comment" method="post">
-                    <textarea name="content" id="" cols="30" rows="1" placeholder="Comment..."></textarea>
+                    <div>
+                        <textarea name="content" id="" cols="30" rows="1" placeholder="Comment..."></textarea>
+                    </div>
                     <input type="hidden" value="<%= post._id %>" name="post" id="">
-                    <button type="submit">Comment</button>
+                    <div>
+                        <button type="submit">Comment</button>
+                    </div>
                 </form>
                 <% } %>
         </div>

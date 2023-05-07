@@ -18,11 +18,13 @@ module.exports.update = async function(req, res) {
             if (!user) {
                 return res.status(404).send('User not found');
             }
+            req.flash('success', 'User updated Successfully');
             return res.redirect('back');
         }
         return res.redirect('back');
     } catch (err) {
-        console.log(err);
+        // console.log(err);
+        req.flash('error', 'Not updated Successfully');
         return res.status(500).send('Internal server error');
     }
 }
@@ -63,11 +65,13 @@ module.exports.createUser = async function(req, res) {
                 email: userData.email,
                 password: userData.password
             });
-            console.log(user);
+            // console.log(user);
+            req.flash('success', 'Registered Successfully');
             return res.redirect('/users/sign-in');
         }
         return res.redirect('back');
     } catch (error) {
+        req.flash('error', 'Error while registeration');
         console.log(`Error while creating the user ${error}`);
     }
 }

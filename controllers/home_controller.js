@@ -20,6 +20,7 @@ module.exports.home = async function(req, res) {
     // Nested population
     try {
         var post = await Post.find({})
+            .sort('-createdAt')
             .populate('user')
             .populate({
                 path: 'comment',

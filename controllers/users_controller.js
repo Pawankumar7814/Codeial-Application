@@ -89,7 +89,7 @@ module.exports.destroySession = function(req, res) {
             console.send(err); // Error showing in the terminal while sign out
         }
     });
-    // Passport gives this req.
     req.flash('success', 'Logged out successfully.');
+    // Passport gives this req.
     return res.redirect('/');
 }

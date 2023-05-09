@@ -13,6 +13,16 @@ module.exports.postCreate = async function(req, res) {
             content: postData.content,
             user: req.user._id
         });
+
+        if (req.xhr) {
+            return res.status(200).json({
+                data: {
+                    post: post
+                },
+                message: 'post Created!'
+            })
+        }
+
         req.flash('success', 'New Post Added');
         return res.redirect('back');
     } catch (error) {

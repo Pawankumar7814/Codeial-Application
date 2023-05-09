@@ -14,6 +14,7 @@
                     // console.log(data);
                     let newPost = newPostDom(data.data.post);
                     $('#post-list-container>ul').prepend(newPost);
+                    deletePost($(" .delete-post-button", newPost)); // space is required
                 },
                 error: function(error) {
                     console.log(error.responseText);
@@ -50,6 +51,24 @@
                 </ul>
             </div>
         </li>`)
+    }
+
+    // Method to delete the post
+    let deletePost = function(deleteLink) {
+        ($deleteLink).click(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success: function(data) {
+                    $(`#post-${data.post._id}`).remove();
+                },
+                error: function(err) {
+                    console.log(err.responseText);
+                }
+            });
+        });
     }
 
     createPost();
